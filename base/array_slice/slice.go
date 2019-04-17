@@ -17,6 +17,18 @@ func sum(a []int ) int{
 	return total
 
 }
+//https://github.com/Unknwon/the-way-to-go_ZH_CN/blob/master/eBook/07.5.md
+func AppendByte(slice []byte,data ... byte)[]byte{
+	sliceLen:=len(slice)
+	sliceCap:=cap(slice)
+	dataLen:=len(data)
+	if sliceCap<sliceLen+dataLen {
+		
+	}
+	copy(slice[len(slice):],data)
+	
+	return slice
+}
 
 func main(){
 	/*
@@ -48,17 +60,18 @@ func main(){
 	fmt.Printf("len(slice2)=%d,cap(slice2)=%d\n",len(slice2),cap(slice2)) //4,5
 	*/
 	//copy与append
-	/*
+	
 	sl_from:= []int{1,3,5}
 	sl_to:=make([]int,10)
+	sl_to[0]=9
 	
-	n:=copy(sl_to,sl_from)
-	fmt.Printf("n=%d,sl_to=%d\n",n,sl_to)//n=3,sl_to=[1 3 5 0 0 0 0 0 0 0]
+	n:=copy(sl_to[1:],sl_from)
+	fmt.Printf("n=%d,sl_to=%d\n",n,sl_to)//n=3,sl_to=[9 1 3 5 0 0 0 0 0 0]
 	
 	sl3:=[]int{4,6,8}
 	sl3=append(sl3,1,3,5)
 	fmt.Printf("sl3=%d\n",sl3)//sl3=[4 6 8 1 3 5]
-	*/
+	
 	
 	
 	
