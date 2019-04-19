@@ -20,7 +20,10 @@ func main()  {
 	*/
 	//删除索引位于1的元素
 	str:=[]byte{'p','a','h','p'}
+	print(cap(str[:1]),"------------",cap(str[2:]),"\n")// 4   2
+
 	str=append(str[:1],str[2:]...)
+	print(cap(str),"\n")  //4
 
 	fmt.Println(string(str))
 
