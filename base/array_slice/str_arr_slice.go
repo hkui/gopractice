@@ -5,8 +5,6 @@
 
 package main
 
-import "fmt"
-
 func main()  {
 	//修改字符串
 
@@ -18,14 +16,32 @@ func main()  {
 
 	fmt.Println(s);
 	*/
+
 	//删除索引位于1的元素
+	/*
 	str:=[]byte{'p','a','h','p'}
-	print(cap(str[:1]),"------------",cap(str[2:]),"\n")// 4   2
 
-	str=append(str[:1],str[2:]...)
-	print(cap(str),"\n")  //4
+	str1:=append(str[:1],str[2:]...)
 
-	fmt.Println(string(str))
+	fmt.Println(string(str1))
+	 */
+
+	/*
+	s:=[]byte{'a','b','c','d'}
+	s1:=s[:]
+	s1[0]='e'
+	s2:=s[:]
+	s2[1]='f'
+	fmt.Println(string(s),string(s1),string(s2)) //均是efcd
+	*/
+
+
+
+
+
+
+
+
 
 
 
