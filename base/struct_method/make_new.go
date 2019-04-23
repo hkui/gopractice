@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type m1 map[string]string
 type s1 struct{
 	 a int
@@ -7,7 +9,7 @@ type s1 struct{
 }
 
 func main()  {
-	ss1:=new(s1)
+/*	ss1:=new(s1)
 	(*ss1).a=10
 	(*ss1).b="bbb"
 
@@ -15,6 +17,29 @@ func main()  {
 
 	mm1:=make(m1)
 	mm1["a"]="ajax"
+*/
+	/*
+	//错误  对于引用类型的变量，我们不光要声明它，还要为它分配内容空间，否则我们的值放在哪里去呢
+	//对于值类型的声明不需要，是因为已经默认帮我们分配好了
+	//make返回的还是这三个引用类型本身;而new返回的是指向类型的指针
+	var i *int
+	*i=10;
+	fmt.Println(*i)
+	*/
+
+	var i *int
+	i=new(int)
+	*i=10
+	fmt.Println(*i)
+
+	var pj *int;
+	var  j int =11
+	pj=&j
+
+	fmt.Println(*pj)
+
+
+
 
 
 }
