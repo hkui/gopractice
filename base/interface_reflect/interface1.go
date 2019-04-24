@@ -1,3 +1,4 @@
+//Go 语言中的接口都很简短，通常它们会包含 0 个、最多 3 个方法
 package main
 
 import "fmt"
