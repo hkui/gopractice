@@ -62,7 +62,7 @@ func main() {
 	fmt.Println("\n--------------------------\n")
 
 	var stu Person=student{"hk",18}
-	
+
 
 	if sv,ok:=stu.(Person);ok{
 		fmt.Printf("stu implements Person():%s\n",sv.intro())
