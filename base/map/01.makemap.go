@@ -1,23 +1,20 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
-
 func main(){
-	/*
+/*
 	var ret= map[string]string{"a":"ajax"} //定义时才能用{} 赋值
 	ret["age"]="hk"
 
 	fmt.Println(ret["a"])
+*/
 
+	/*
 	var m1=map[string](map[int]string){"a":{1:"ajax1",3:"php"},"bb":{10:"java"}}
 	fmt.Println(m1)
-	*/
+
 
 	//make初始化
-/*
+
 	map1:=make(map[string]int)
 	map1["p"]=1
 
@@ -26,9 +23,10 @@ func main(){
 	map2["php"]=make(map[int]string)
 	map2["php"][1]="ok"
 	fmt.Println(map1,map2)
-	 */
+	*/
+
 	//函数和切片作为值类型
-	/*
+/*
 	mapfun:=map[int]func(int)int{
 		1: func(n int ) int {
 			return n
@@ -48,8 +46,8 @@ func main(){
 		2:{4,6,8,9},
 	}
 	fmt.Println(mapslice)
-	 */
 
+*/
 	//测试键值对是否存在及删除元素
 /*
 	m1:=map[string]string{"a":"ajax","c":"cpp"}
@@ -66,15 +64,18 @@ func main(){
 	delete(m1,"c")
 	fmt.Println(m1)
 */
-	//假设我们想获取一个 map 类型的切片，我们必须使用两次 make() 函数，第一次分配切片，第二次分配 切片中每个 map
+	//假设我们想获取一个 map 类型的切片，使用两次 make() 函数，第一次分配切片，第二次分配 切片中每个 map
 
-	/*
+/*
 	items:=make([]map[int]int,5)
 	for i:=range items{
 		items[i]=make(map[int]int,1)
 		items[i][1] = 2
 	}
-	*/
+	fmt.Println(items)
+*/
+
+	/*
 	a:=map[string]string{"a":"ajax","c":"cpp","j":"java","b":"bjson"}
 
 	keys:=make([]string,len(a))
@@ -90,7 +91,7 @@ func main(){
 	fmt.Println(keys)
 	for _,v:=range keys{
 		fmt.Println(a[v])
-	}
+	}*/
 
 
 
