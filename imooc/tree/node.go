@@ -1,58 +1,34 @@
 package main
 
-import "fmt"
-
-type treeNode struct {
-	value int
-	left,right *treeNode
-}
-func createTreeNode(value int) *treeNode{
-	return &treeNode{value:value}  //返回了局部变量的地址
-}
-func (node treeNode)print()  {
-	fmt.Print(node.value)
-}
-func (node *treeNode)setValue(value int)  {
-	if(node ==nil){
-		fmt.Println("setting value=",value," to nil")
-		return
-	}
-	node.value=value
-}
-//中序遍历(左中右)
-func (node *treeNode)traverse()  {
-	if(node ==nil){
-		return
-	}
-	node.left.traverse()
-	node.print()
-	node.right.traverse()
-}
+import (
+	"fmt"
+	"imooc/tree/tree"
+)
 
 
 func main()  {
-	var root treeNode
+	var root tree.TreeNode
 
-	root=treeNode{value:3}
-	root.left=&treeNode{value:2}
-	root.right=&treeNode{5,nil,nil}
-	root.right.left=new(treeNode) //初始值为0
-	root.right.right=createTreeNode(7)
+	root=tree.TreeNode{Value:3}
+	root.Left=&tree.TreeNode{Value:2}
+	root.Right=&tree.TreeNode{5,nil,nil}
+	root.Right.Left=new(tree.TreeNode) //初始值为0
+	root.Right.Right=tree.CreateTreeNode(7)
 
-	root.traverse() //23507
+	root.Traverse() //23507
 	fmt.Print("\n####################")
 
 	pRoot:=&root
-	pRoot.print()
+	pRoot.Print()
 	fmt.Println()
-	pRoot.setValue(100)
-	pRoot.print()
+	pRoot.SetValue(100)
+	pRoot.Print()
 	fmt.Println("\n---------")
 
-	var pproot *treeNode
-	pproot.setValue(200)
+	var pproot *tree.TreeNode
+	pproot.SetValue(200)
 	pproot=&root
-	pproot.setValue(500)
-	pproot.print()
+	pproot.SetValue(500)
+	pproot.Print()
 
 }
