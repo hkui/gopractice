@@ -4,19 +4,41 @@ import (
 	"fmt"
 	"imooc/tree/tree"
 )
+//扩展已有类型
+type myTreeNode struct {
+	node *tree.Node
+}
+
+//后序遍历，左右中
+func (myNode *myTreeNode)postOrder()  {
+	if myNode==nil || myNode.node==nil{
+		return
+	}
+	left:=myTreeNode{myNode.node.Left}
+	right:=myTreeNode{myNode.node.Right}
+
+	left.postOrder()
+	right.postOrder()
+	myNode.node.Print()
+
+}
 
 
 func main()  {
-	var root tree.TreeNode
+	var root tree.Node
 
-	root=tree.TreeNode{Value:3}
-	root.Left=&tree.TreeNode{Value:2}
-	root.Right=&tree.TreeNode{5,nil,nil}
-	root.Right.Left=new(tree.TreeNode) //初始值为0
-	root.Right.Right=tree.CreateTreeNode(7)
+	root=tree.Node{Value:3}
+	root.Left=&tree.Node{Value:2}
+	root.Right=&tree.Node{5,nil,nil}
+	root.Right.Left=new(tree.Node) //初始值为0
+	root.Right.Right=tree.CreateNode(7)
 
 	root.Traverse() //23507
-	fmt.Print("\n####################")
+	fmt.Println()
+	myRoot:=myTreeNode{&root}
+	myRoot.postOrder()
+	fmt.Println()
+	/*fmt.Print("\n####################")
 
 	pRoot:=&root
 	pRoot.Print()
@@ -25,10 +47,12 @@ func main()  {
 	pRoot.Print()
 	fmt.Println("\n---------")
 
-	var pproot *tree.TreeNode
+	var pproot *tree.Node
 	pproot.SetValue(200)
 	pproot=&root
 	pproot.SetValue(500)
-	pproot.Print()
+	pproot.Print()*/
+
+
 
 }
