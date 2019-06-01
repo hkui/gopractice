@@ -11,17 +11,18 @@ type Retriever struct {
 	TimeOut time.Duration
 }
 
-func (Retriever) Get(url string) string {
+func (r Retriever) Get(url string) string {
 	resp,err:=http.Get(url)
 	if err!=nil{
 		panic(err)
 	}
 	result,err:=httputil.DumpResponse(resp,true)
 
-	resp.Body.Close()
+
 	if err!=nil{
 		panic(err)
 	}
+	resp.Body.Close()
 
 	return  string(result)
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"imooc/retriever/mock"
+	real2 "imooc/retriever/real"
 )
 
 type Retriever interface {
@@ -15,8 +16,15 @@ func download(r Retriever)string  {
 
 func main()  {
 	var r Retriever
-	r=mock.Retriever{"this is baidu"}
+	r=mock.Mretriever{"this is baidu"}
 	fmt.Println(download(r))
+
+	fmt.Println()
+
+	r2:=real2.Retriever{"oper",3}
+	fmt.Println(download(r2))
+
+
 
 
 

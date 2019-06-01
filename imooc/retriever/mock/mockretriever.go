@@ -1,11 +1,11 @@
 package mock
 
-type Retriever struct {
+type Mretriever struct {
 	Contents string
 
 }
 
-func (r Retriever) Get(url string) string {
+func (r Mretriever) Get(url string) string {
 	return  r.Contents
 }
 
