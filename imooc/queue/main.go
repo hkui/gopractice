@@ -1,13 +1,15 @@
 package main
+//类型转换
 
 import (
 	"fmt"
-	"imooc/queue"
+	"imooc/queue/q"
 )
 
 
 func main()  {
-	q:=queue.Queue{1}
+
+	q:=q.Queue{1}
 	q.Push(2)
 	q.Push(3)
 	fmt.Println(q.Pop())
