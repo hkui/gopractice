@@ -34,10 +34,26 @@ func main()  {
 	root.Right.Right=tree.CreateNode(7)
 
 	root.Traverse() //23507
+
 	fmt.Println()
 	myRoot:=myTreeNode{&root}
 	myRoot.postOrder()
 	fmt.Println()
+
+
+	fmt.Println("\ntraverse1----------")
+
+	root.Traverse1()
+	nodeCount:=0
+
+	root.TraverseFunc(func(node *tree.Node) {
+		nodeCount++
+	})
+	fmt.Printf("nodeCount=%d\n",nodeCount)
+
+
+
+
 	/*fmt.Print("\n####################")
 
 	pRoot:=&root
