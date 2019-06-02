@@ -7,9 +7,9 @@ import (
 	"os"
 )
 
-type appHandle func(writer http.ResponseWriter, request *http.Request)error
+type appHandle func( http.ResponseWriter,  *http.Request)error
 
-func errWrapper(handler appHandle) func(writer http.ResponseWriter, request *http.Request) {
+func errWrapper(handler appHandle) func( http.ResponseWriter,  *http.Request) {
 
 	return func(writer http.ResponseWriter, request *http.Request){
 		err:=handler(writer,request)
