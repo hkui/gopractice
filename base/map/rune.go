@@ -2,9 +2,6 @@ package main
 
 import "fmt"
 
-func maxDiffLen()  {
-
-}
 
 func main()  {
 

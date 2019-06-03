@@ -18,7 +18,7 @@ func errWrapper(handler list.AppHandle) func( http.ResponseWriter,  *http.Reques
 
 			}
 		}()
-		
+
 		err:=handler(writer,request)
 		if err!=nil{
 			if userErr,ok:=err.(userError);ok{

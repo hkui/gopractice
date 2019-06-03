@@ -1,7 +1,9 @@
 package main
 
 import "fmt"
-
+/**
+查找不重复字串的最大长度
+ */
 func diffStrMaxLen(s string) int {
 	lastOccured:=make(map[rune]int)
 	len:=0
