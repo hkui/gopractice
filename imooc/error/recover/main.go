@@ -10,6 +10,8 @@ func tryRecover() {
 		if r != nil {
 			if err, ok := r.(error); ok {
 				fmt.Printf("error=%s\n", err)
+			}else{
+				//panic("not know how to do")
 			}
 			fmt.Println("#######all####################")
 			fmt.Printf("%T====%v\n", r, r)

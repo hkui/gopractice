@@ -7,15 +7,28 @@ import (
 	"os"
 )
 
-type appHandle func( http.ResponseWriter,  *http.Request)error
-
-func errWrapper(handler appHandle) func( http.ResponseWriter,  *http.Request) {
+func errWrapper(handler list.AppHandle) func( http.ResponseWriter,  *http.Request) {
 
 	return func(writer http.ResponseWriter, request *http.Request){
+
+		defer func() {
+			if r:=recover();r!=nil{
+				log.Printf("panic:%v",r)
+				http.Error(writer,http.StatusText(http.StatusInternalServerError),http.StatusInternalServerError)
+
+			}
+		}()
+		
 		err:=handler(writer,request)
 		if err!=nil{
-			log.Printf("err=%s",err.Error())
+			if userErr,ok:=err.(userError);ok{
+				http.Error(writer,userErr.Message(),http.StatusBadRequest)
+				return
+			}
+
+
 			code:=http.StatusOK
+			log.Printf("err=%s,code=%d\n",err.Error(),code)
 			switch  {
 			case os.IsNotExist(err):
 				code=http.StatusNotFound
@@ -30,8 +43,13 @@ func errWrapper(handler appHandle) func( http.ResponseWriter,  *http.Request) {
 	}
 }
 
+type userError interface {
+	error
+	Message() string
+}
+
 func main()  {
-	http.HandleFunc("/static/",errWrapper(list.Handle))
+	http.HandleFunc("/",errWrapper(list.Handle))
 	err:=http.ListenAndServe(":8888",nil)
 	if err!=nil{
 			panic(err)
