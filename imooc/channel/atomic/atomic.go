@@ -13,7 +13,7 @@ type atomicInt struct {
 
 func (a *atomicInt)increment()  {
 	fmt.Println("safe increment")
-
+	//让这一块代码原子性
 	func(){
 		a.lock.Lock()
 		defer a.lock.Unlock()
