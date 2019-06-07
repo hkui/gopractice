@@ -30,6 +30,7 @@ func readMaze(filename string) [][]int {
 type point struct {
 	i,j int
 }
+
 var dirs=[4]point{
 	{-1,0},//上左下右
 	{0,-1},
