@@ -4,6 +4,7 @@ import (
 	"imooc/error/list"
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 )
 
