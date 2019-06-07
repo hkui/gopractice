@@ -33,15 +33,16 @@ func main()  {
 	root.Right.Left=new(tree.Node) //初始值为0
 	root.Right.Right=tree.CreateNode(7)
 
+	fmt.Println("中序遍历:")
 	root.Traverse() //23507
 
-	fmt.Println()
+
 	myRoot:=myTreeNode{&root}
+	fmt.Println("\n后续遍历:")
 	myRoot.postOrder()
-	fmt.Println()
 
 
-	fmt.Println("\ntraverse1----------")
+	fmt.Println("\n------------------traverse1----------")
 
 	root.Traverse1()
 	nodeCount:=0
