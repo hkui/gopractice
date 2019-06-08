@@ -44,7 +44,6 @@ func Fetch(url string) ([]byte,error) {
 
 	return  ioutil.ReadAll(reader)
 
-
 }
 
 func determineEncoding(r *bufio.Reader) encoding.Encoding{

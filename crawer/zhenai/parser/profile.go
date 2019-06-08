@@ -49,6 +49,8 @@ func ParseProfile(contents []byte,s string) engine.ParseResult  {
 	profile.Name=s
 	pr:=engine.ParseResult{}
 	pr.Items=append(pr.Items,profile)
+	//不再向队列加reuquests了
+
 	return pr
 }
 
