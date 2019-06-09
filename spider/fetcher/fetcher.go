@@ -10,12 +10,14 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 const ua  ="Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+var rateLimiter=time.Tick(100*time.Millisecond)
 
 func Fetch(url string) ([]byte,error) {
-
+	<-rateLimiter
 	request,err:= http.NewRequest(http.MethodGet,url,nil)
 	if err!=nil{
 		panic(err)
