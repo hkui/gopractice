@@ -1,6 +1,9 @@
 package scheduler
 
-import "spider/engine"
+import (
+	"fmt"
+	"spider/engine"
+)
 
 type QueuedScheduler struct {
 	requestChan chan engine.Request
@@ -37,10 +40,14 @@ func (s *QueuedScheduler) Run() {
 			}
 			select {
 			case r := <-s.requestChan: //submit往里送数据，这里取数据
+				fmt.Println("read from s.requestChan")
 				requestQ = append(requestQ, r)
 			case w := <-s.workerChan: //WorkerReady往里送数据，这里取数据
+				fmt.Println("read from s.workerChan")
+
 				workerQ = append(workerQ, w)
 			case activeWorker <- activeRequest: //request 的chan加到active
+				fmt.Println("activeRequest->activeWorker")
 				workerQ = workerQ[1:]
 				requestQ = requestQ[1:]
 

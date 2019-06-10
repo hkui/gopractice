@@ -1,7 +1,9 @@
 package engine
 
 import (
+	"fmt"
 	"log"
+	"time"
 )
 
 type ConcurrentEngine struct {
@@ -45,13 +47,19 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 func createWorker(in chan Request,out chan ParseResult,notifier ReadyNotifier)  {
 	go func() {
 		for{
+			fmt.Println("ready start")
 			notifier.WorkerReady(in)
+			time.Sleep(time.Second)
+			fmt.Println("ready overs")
 			request:=<-in
+			fmt.Println("in->request ok")
 			result,err:=worker(request)
 			if err!=nil{
 				continue
 			}
+			fmt.Println("request->out start")
 			out<-result
+			fmt.Println("request->out overs")
 		}
 	}()
 }
