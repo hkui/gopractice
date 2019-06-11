@@ -3,7 +3,6 @@ package engine
 import (
 	"fmt"
 	"log"
-	"time"
 )
 
 type ConcurrentEngine struct {
@@ -31,11 +30,13 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 		fmt.Println("send s.requestChan")
 		e.Scheduler.Submit(r)
 	}
+
+
 	itemCount:=0
 	for {
-		fmt.Println("get from out")
+		fmt.Println("[get from out")
 		result:=<-out
-		fmt.Println("get from out over")
+		fmt.Println("get from out]")
 
 		for _,item:=range result.Items{
 			itemCount++
@@ -50,20 +51,18 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 func createWorker(in chan Request,out chan ParseResult,notifier ReadyNotifier)  {
 	go func() {
 		for{
-			fmt.Println("send s.workerChan")
+			fmt.Printf("send s.workerChan %v\n",in)
 			notifier.WorkerReady(in)
-			fmt.Println("send s.workerChan over")
-			time.Sleep(time.Second)
-			fmt.Println("in->request")
+			fmt.Println("[in->request")
 			request:=<-in
-			fmt.Println("in->request ok")
+			fmt.Println("in->request]")
 			result,err:=worker(request)
 			if err!=nil{
 				continue
 			}
-			fmt.Println("request->out start")
+			fmt.Println("[request->out")
 			out<-result
-			fmt.Println("request->out over")
+			fmt.Println("request->out]")
 		}
 	}()
 }

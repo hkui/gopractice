@@ -10,7 +10,7 @@ const seedUrl ="https://www.zhenai.com/zhenghun"
 func main() {
 	e:=engine.ConcurrentEngine{
 		Scheduler:&scheduler.QueuedScheduler{},
-		WorkerCount:2,
+		WorkerCount:5,
 	}
 
 
