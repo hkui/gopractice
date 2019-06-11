@@ -41,13 +41,10 @@ func (e SimpleEngine )Run(seeds ...Request)  {
 
 //从request获取parseRequest
 func worker(r Request)(ParseResult,error)  {
-	log.Printf("<<<<<<<<<<<<<<<<<<<<Begin Fetch %s",r.Url)
 	body, err := fetcher.Fetch(r.Url)
 	if err!=nil{
 		log.Printf("Fetcher :error Fetch url %s:%v\n",r.Url,err)
 		return ParseResult{},err
-	}else {
-		log.Printf("End Fetch %s>>>>>>>>>>>>>>>>>>>>\n\n",r.Url)
 	}
 	parseResult := r.ParseFunc(body)
 	return parseResult,nil

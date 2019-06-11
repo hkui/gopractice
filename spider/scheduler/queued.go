@@ -1,7 +1,6 @@
 package scheduler
 
 import (
-	"fmt"
 	"spider/engine"
 )
 
@@ -32,7 +31,7 @@ func (s *QueuedScheduler) Run() {
 		var workerQ []chan engine.Request
 
 		for {
-			fmt.Printf("len(requestQ)=%d,len(workerQ)=%d\n",len(requestQ),len(workerQ))
+			//fmt.Printf("len(requestQ)=%d,len(workerQ)=%d\n",len(requestQ),len(workerQ))
 			var activeRequest engine.Request
 			var activeWorker chan engine.Request
 			if len(requestQ) > 0 && len(workerQ) > 0 {
@@ -41,14 +40,10 @@ func (s *QueuedScheduler) Run() {
 			}
 			select {
 			case r := <-s.requestChan: //submit往里送数据，这里取数据
-				fmt.Println("read from s.requestChan")
 				requestQ = append(requestQ, r)
 			case w := <-s.workerChan: //WorkerReady往里送数据，这里取数据
-				fmt.Println("read from s.workerChan")
-
 				workerQ = append(workerQ, w)
 			case activeWorker <- activeRequest: //request 的chan加到active
-				fmt.Println("activeRequest->activeWorker")
 				//请求和chan从各自的队列中删除，如果不删除,activeworker在worker里没人接，这边再写就回阻塞
 				workerQ = workerQ[1:]
 				requestQ = requestQ[1:]

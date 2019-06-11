@@ -8,6 +8,7 @@ import (
 type ConcurrentEngine struct {
 	Scheduler Scheduler
 	WorkerCount int
+	ItemChan chan interface{}
 }
 type Scheduler interface {
 	Submit( Request)
@@ -34,13 +35,14 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 
 	itemCount:=0
 	for {
-		fmt.Println("[get from out")
 		result:=<-out
-		fmt.Println("get from out]")
 
 		for _,item:=range result.Items{
 			itemCount++
 			log.Printf("got item #%d %v",itemCount,item)
+			go func() {
+				e.ItemChan <-item
+			}()
 		}
 		for _,request:=range result.Requests{
 			e.Scheduler.Submit(request)
@@ -51,18 +53,13 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 func createWorker(in chan Request,out chan ParseResult,notifier ReadyNotifier)  {
 	go func() {
 		for{
-			fmt.Printf("send s.workerChan %v\n",in)
 			notifier.WorkerReady(in)
-			fmt.Println("[in->request")
 			request:=<-in
-			fmt.Println("in->request]")
 			result,err:=worker(request)
 			if err!=nil{
 				continue
 			}
-			fmt.Println("[request->out")
 			out<-result
-			fmt.Println("request->out]")
 		}
 	}()
 }
