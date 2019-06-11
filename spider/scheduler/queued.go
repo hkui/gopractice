@@ -49,6 +49,7 @@ func (s *QueuedScheduler) Run() {
 				workerQ = append(workerQ, w)
 			case activeWorker <- activeRequest: //request 的chan加到active
 				fmt.Println("activeRequest->activeWorker")
+				//请求和chan从各自的队列中删除，如果不删除,activeworker在worker里没人接，这边再写就回阻塞
 				workerQ = workerQ[1:]
 				requestQ = requestQ[1:]
 
