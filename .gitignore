@@ -1,4 +1,5 @@
 .idea
+.idea/
 *.exe
 # netbeans project files
 nbproject
