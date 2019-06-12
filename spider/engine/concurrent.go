@@ -2,7 +2,6 @@ package engine
 
 import (
 	"fmt"
-	"log"
 )
 
 type ConcurrentEngine struct {
@@ -39,7 +38,7 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 
 		for _,item:=range result.Items{
 			itemCount++
-			log.Printf("got item #%d %v",itemCount,item)
+			//log.Printf("got item #%d %v",itemCount,item)
 			go func() {
 				e.ItemChan <-item
 			}()

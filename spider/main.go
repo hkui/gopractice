@@ -1,6 +1,7 @@
 package main
 
 import (
+	"spider/conf"
 	"spider/engine"
 	"spider/persist"
 	"spider/scheduler"
@@ -9,10 +10,16 @@ import (
 
 const seedUrl ="https://www.zhenai.com/zhenghun"
 func main() {
+	itemChan, err := persist.ItemSaver(conf.EsConf)
+	if err!=nil{
+		panic(err)
+	}
+
 	e:=engine.ConcurrentEngine{
 		Scheduler:&scheduler.QueuedScheduler{},
 		WorkerCount:5,
-		ItemChan:persist.ItemSaver(),
+		ItemChan:itemChan,
+
 	}
 
 
@@ -20,8 +27,8 @@ func main() {
 		Scheduler:&scheduler.SimpleScheduler{},
 		WorkerCount:5,
 	}*/
-	//Requests:=engine.Request{Url:seedUrl,ParseFunc:parser.ParseCityList}
-	Requests:=engine.Request{Url:"http://www.zhenai.com/zhenghun/beijing",ParseFunc:parser.ParseCity}
+	Requests:=engine.Request{Url:seedUrl,ParseFunc:parser.ParseCityList}
+	//Requests:=engine.Request{Url:"http://www.zhenai.com/zhenghun/shenzhen",ParseFunc:parser.ParseCity}
 	e.Run(Requests)
 }
 

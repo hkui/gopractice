@@ -21,6 +21,7 @@ func ParseProfile(contents []byte,s string) engine.ParseResult  {
 
 	morestr:=extractString(contents,reMore)//阿坝 | 42岁 | 大学本科 | 离异 | 163cm | 5001-8000元
 	strArr:=strings.Split(morestr,"|")
+	profile.Url=s
 	if len(strArr)==6{
 		profile.Position=strings.Trim(strArr[0]," ")
 		profile.Education=strings.Trim(strArr[2]," ")
@@ -45,8 +46,7 @@ func ParseProfile(contents []byte,s string) engine.ParseResult  {
 	if err==nil{
 		profile.Id= Id
 	}
-	//profile.Name=extractString(contents,reNickname)
-	profile.Name=s
+	profile.Name=extractString(contents,reNickname)
 	pr:=engine.ParseResult{}
 	pr.Items=append(pr.Items,profile)
 	//不再向队列加reuquests了
@@ -65,6 +65,11 @@ func extractString(contents []byte,re *regexp.Regexp) string {
 	}
 	return ""
 
+}
+func profileParser(url string) engine.ParseFunc  {
+	return func(c []byte) engine.ParseResult{
+		return ParseProfile(c,url)
+	}
 }
 
 

@@ -2,6 +2,7 @@ package model
 
 type Profile struct {
 	Id        int
+	Url 	  string
 	Name      string
 	Gender    string
 	Age       int
