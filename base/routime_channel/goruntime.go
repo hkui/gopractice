@@ -7,21 +7,21 @@ import (
 
 func main() {
 	fmt.Println("In main()")
-	go longWait()
-	go shortWait()
+	go longWait1()
+	go shortWait1()
 	fmt.Println("About to sleep in main()")
 	// sleep works with a Duration in nanoseconds (ns) !
 	time.Sleep(10 * 1e9)
 	fmt.Println("At the end of main()")
 }
 
-func longWait() {
+func longWait1() {
 	fmt.Println("Beginning longWait()")
 	time.Sleep(5 * 1e9) // sleep for 5 seconds
 	fmt.Println("End of longWait()")
 }
 
-func shortWait() {
+func shortWait1() {
 	fmt.Println("Beginning shortWait()")
 	time.Sleep(2 * 1e9) // sleep for 2 seconds
 	fmt.Println("End of shortWait()")
