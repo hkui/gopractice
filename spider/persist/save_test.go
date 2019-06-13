@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"golang.org/x/net/context"
 	"gopkg.in/olivere/elastic.v5"
+	"spider/conf"
 	"spider/model"
 	"testing"
 )
@@ -12,6 +13,7 @@ import (
 func TestSave(t *testing.T) {
 	item:=model.Profile{
 			Id:1057746505,
+			Url:"http://album.zhenai.com/u/1057746505",
 			Name:"何处不相逢",
 			Gender:"",
 			Age:37 ,
@@ -22,15 +24,17 @@ func TestSave(t *testing.T) {
 			Education:"硕士",
 			Position:"北京",
 		}
-	id, err := Save(item)
+	esConf:=conf.EsConf
+	client, e := elastic.NewClient(elastic.SetURL(esConf["Url"]), elastic.SetSniff(false), )
+	if e != nil {
+		panic(e)
+	}
+	id, err := Save(client,esConf,item)
 	if err!=nil{
 		panic(err)
 	}
-	client, e := elastic.NewClient(elastic.SetURL(Url),elastic.SetSniff(false),)
-	if e!=nil{
-		panic(e)
-	}
-	result, err := client.Get().Index(Index).Type(Type).Id(id).Do(context.Background())
+
+	result, err := client.Get().Index(esConf["Index"]).Type(esConf["Type"]).Id(id).Do(context.Background())
 	if err!=nil{
 		panic(err)
 	}

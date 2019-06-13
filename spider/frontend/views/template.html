@@ -43,20 +43,39 @@
     <div id="search_div">
         <input type="text" id="search_txt"><input type="button" value="search">
     </div>
-    <div id="result_tongji">共为你找到{{.Hits}}条结果。显示从{{.Start}}起共{{len.Items}}个</div>
+    <div id="result_tongji">共为你找到{{.Hits}}条结果。显示从{{.Start}}起共{{len .Items}}个</div>
     <div id="result">
         <table>
             <thead>
-            <tr><th>Id</th><th>name</th></tr>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>收入</th>
+                <th>婚况</th>
+                <th>教育</th>
+                <th>位置</th>
+            </tr>
             </thead>
             <tbody>
                 {{range .Items}}
                 <tr>
-                    <td>{{with .Id}}</td>
-                    <td>{{with .Name}}</td>
+                    <td>{{ .Id}}</td>
+                    <td><a href="{{ .Url}}" target="_blank">链接</a></td>
+                    <td>{{ .Name}}</td>
+                    <td>{{ .Age}}</td>
+                    <td>{{ .Height}}</td>
+                    <td>{{ .Weight}}</td>
+                    <td>{{ .Income}}</td>
+                    <td>{{ .Marriage}}</td>
+                    <td>{{ .Education}}</td>
+                    <td>{{ .Position}}</td>
                 </tr>
                 {{else}}
-                <tr><td colspan="2">没有找到相关的用户</td></tr>
+                <tr><td colspan="10">没有找到相关的用户</td></tr>
                 {{end}}
 
             </tbody>

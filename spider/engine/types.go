@@ -2,6 +2,7 @@ package engine
 
 type ParseFunc func([]byte) ParseResult
 type Item []interface{}
+
 type Request struct {
 	Url string
 	ParseFunc ParseFunc

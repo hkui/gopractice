@@ -12,5 +12,4 @@ type Profile struct {
 	Marriage  string
 	Education string  //教育程度
 	Position  string //地址
-
 }

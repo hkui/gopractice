@@ -1,9 +1,11 @@
 package model
 
-import "spider/engine"
+import (
+	"spider/model"
+)
 
 type SearchResult struct {
 	Hits int
 	Start int
-	Items [] engine.Item
+	Items [] model.Profile
 }
