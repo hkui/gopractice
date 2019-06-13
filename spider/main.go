@@ -27,8 +27,8 @@ func main() {
 		Scheduler:&scheduler.SimpleScheduler{},
 		WorkerCount:5,
 	}*/
-	Requests:=engine.Request{Url:seedUrl,ParseFunc:parser.ParseCityList}
-	//Requests:=engine.Request{Url:"http://www.zhenai.com/zhenghun/shenzhen",ParseFunc:parser.ParseCity}
+	//Requests:=engine.Request{Url:seedUrl,ParseFunc:parser.ParseCityList}
+	Requests:=engine.Request{Url:"http://www.zhenai.com/zhenghun/shenzhen",ParseFunc:parser.ParseCity}
 	e.Run(Requests)
 }
 
