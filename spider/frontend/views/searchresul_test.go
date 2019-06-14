@@ -27,8 +27,7 @@ func TestCreateSearchResultView( t *testing.T)  {
 	for i:=0;i<10;i++{
 		page.Items=append(page.Items,item)
 	}
-	page.Hits=len(page.Items)
-
+	page.Hits=int64(len(page.Items))
 	//err := tpl.Execute(os.Stdout, page)//直接输出
 	file, err := os.Create("template_test.html")
 	err=view.Render(file,page)

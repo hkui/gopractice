@@ -2,46 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Go ElasticSearch</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
 </head>
-<style>
-    #con{
-        text-align: center;
-        margin: 30px;
-    }
-    #search_div input{
-        height: 30px;
-        margin: 10px;
-    }
-    #search_txt{
-        width: 40%;
-        border: 1px solid rebeccapurple;
-        border-radius: 2px;
-    }
-    #result{
-        border: solid 1px brown;
-    }
-    table{
-        border-collapse: collapse;
-        border: solid 1px rosybrown;
-        width: 100%;
 
-    }
-    tr td,th{
-        line-height: 30px;
-        text-align: center;
-        min-width: 40px;
-        border: solid 1px rosybrown;
-    }
-    #result_tongji{
-        margin-bottom: 10px;
-    }
-
-</style>
 <body>
 <div id="con">
     <div id="search_div">
-        <input type="text" id="search_txt"><input type="button" value="search">
+        <form method="get">
+        <input type="text" id="search_txt" value="{{.Query}}" name="q"/>
+        <input type="submit" value="search" />
+        </form>
     </div>
     <div id="result_tongji">共为你找到{{.Hits}}条结果。显示从{{.Start}}起共{{len .Items}}个</div>
     <div id="result">
@@ -77,6 +48,7 @@
                 {{else}}
                 <tr><td colspan="10">没有找到相关的用户</td></tr>
                 {{end}}
+            
 
             </tbody>
         </table>

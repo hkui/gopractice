@@ -1,0 +1,34 @@
+   #con{
+        text-align: center;
+        margin: 30px;
+        font-size: 14px;
+        width: 80%;
+    }
+    #search_div input{
+        height: 30px;
+        margin: 10px;
+    }
+    #search_txt{
+        width: 40%;
+        border: 1px solid rebeccapurple;
+        border-radius: 2px;
+    }
+    #result{
+        border: solid 1px brown;
+    }
+    table{
+        border-collapse: collapse;
+        border: solid 1px rosybrown;
+        width: 100%;
+        border-radius: 1px
+
+    }
+    tr td,th{
+        line-height: 30px;
+        text-align: center;
+        min-width: 40px;
+        border: solid 1px rosybrown;
+    }
+    #result_tongji{
+        margin-bottom: 10px;
+    }

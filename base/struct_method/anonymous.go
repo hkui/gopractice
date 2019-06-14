@@ -31,7 +31,7 @@ func main()  {
 	stu1.height=165
 	stu1.Person.height=180
 	stu1.sex=1
-	fmt.Println(stu1) //&{11 0301 20 {50 180 1}}
+	fmt.Println(stu1,stu1.sex) //&{11 0301 20 {50 180 1}}
 
 	stu2:=student{12,"032",33,Person{55,170,2}}
 	fmt.Println(stu2)	//{12 032 33 {55 170 2}}
