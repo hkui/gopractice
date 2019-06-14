@@ -1,11 +1,7 @@
 package model
 
-import (
-	"spider/model"
-)
-
 type SearchResult struct {
-	Hits int
+	Hits int64
 	Start int
-	Items [] model.Profile
+	Items []interface{}
 }
