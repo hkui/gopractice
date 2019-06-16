@@ -8,3 +8,5 @@ var EsConf = EsConfType{
 	"Index": "db_test",
 	"Type":  "user",
 }
+//DEBUG为true 不存储
+const DEBUG = true

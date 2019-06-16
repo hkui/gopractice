@@ -13,12 +13,10 @@ var  reNickname  =regexp.MustCompile(`<h1 \s*class="nickName"[^<]+>([^<]+)</h1>`
 
 var  reId  =regexp.MustCompile(`<div class="id" [^>]+>ID：(\d+)</div>`)
 
-
 var reMore=regexp.MustCompile(`<div class="des f-cl" [^>]+>([^<]+)</div>`)
 
-func ParseProfile(contents []byte,s string) engine.ParseResult  {
+func parseProfile(contents []byte,s string) engine.ParseResult  {
 	profile:=model.Profile{}
-
 	morestr:=extractString(contents,reMore)//阿坝 | 42岁 | 大学本科 | 离异 | 163cm | 5001-8000元
 	strArr:=strings.Split(morestr,"|")
 	profile.Url=s
@@ -50,26 +48,38 @@ func ParseProfile(contents []byte,s string) engine.ParseResult  {
 	pr:=engine.ParseResult{}
 	pr.Items=append(pr.Items,profile)
 	//不再向队列加reuquests了
-
 	return pr
 }
 
 func extractString(contents []byte,re *regexp.Regexp) string {
 	match := re.FindSubmatch(contents)
-	//for _,m:=range match{
-	//	fmt.Printf("%s\n",m)
-	//}
-	//fmt.Println("-------------------------------------")
 	if len(match)>=2{
 		return string(match[1])
 	}
 	return ""
 
 }
-func profileParser(url string) engine.ParseFunc  {
-	return func(c []byte) engine.ParseResult{
-		return ParseProfile(c,url)
-	}
+
+type ProfileParser struct {
+	userName string
 }
+
+func (p *ProfileParser) Parse(contents []byte, name string) engine.ParseResult {
+	return parseProfile(contents,p.userName)
+}
+
+func (p *ProfileParser) Serialize() (name string, args interface{}) {
+	return "ProfileParser",p.userName
+}
+
+
+func NewProfileParser(name string) *ProfileParser  {
+		return &ProfileParser{
+			userName:name,
+		}
+}
+
+
+
 
 

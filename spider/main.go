@@ -9,6 +9,7 @@ import (
 )
 
 const seedUrl ="https://www.zhenai.com/zhenghun"
+
 func main() {
 	itemChan, err := persist.ItemSaver(conf.EsConf)
 	if err!=nil{
@@ -21,14 +22,12 @@ func main() {
 		ItemChan:itemChan,
 
 	}
-
-
 	/*esimple:=engine.ConcurrentEngine{
 		Scheduler:&scheduler.SimpleScheduler{},
 		WorkerCount:5,
 	}*/
-	//Requests:=engine.Request{Url:seedUrl,ParseFunc:parser.ParseCityList}
-	Requests:=engine.Request{Url:"http://www.zhenai.com/zhenghun/shenzhen",ParseFunc:parser.ParseCity}
+	//Requests:=engine.Request{Url:seedUrl,Parser:engine.NewFuncParser(parser.ParseCityList,"ParseCityList")}
+	Requests:=engine.Request{Url:"http://www.zhenai.com/zhenghun/shenzhen",Parser:engine.NewFuncParser(parser.ParseCity,"ParseCity")}
 	e.Run(Requests)
 }
 
