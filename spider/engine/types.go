@@ -37,10 +37,10 @@ func NewFuncParser(p ParseFunc, name string) *FuncParser {
 
 type NilParser struct {}
 
-func (*NilParser) Parse(contents []byte, name string) ParseResult {
+func (NilParser) Parse(contents []byte, name string) ParseResult {
 	return ParseResult{}
 }
 
-func (*NilParser) Serialize(_ string, _ interface{}) (string, interface{}) {
+func (NilParser) Serialize() (string, interface{}) {
 	return "NilParser", nil
 }

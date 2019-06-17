@@ -6,7 +6,7 @@ import (
 )
 
 //从request获取parseRequest
-func worker(r Request)(ParseResult,error)  {
+func Worker(r Request)(ParseResult,error)  {
 	body, err := fetcher.Fetch(r.Url)
 	if err!=nil{
 		log.Printf("Fetcher :error Fetch url %s:%v\n",r.Url,err)
