@@ -31,7 +31,7 @@ func TestCrawlService(t *testing.T)  {
 	if err!=nil{
 		t.Error(err)
 	}else{
-		fmt.Printf("%+v",result)
+		fmt.Printf("%+v",&result)
 	}
 
 }

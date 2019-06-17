@@ -1,6 +1,9 @@
 package worker
 
-import "spider/engine"
+import (
+	"fmt"
+	"spider/engine"
+)
 
 type CrawlService struct {
 
@@ -16,6 +19,7 @@ func (CrawlService)Process(req Request,result *ParseResult)error  {
 		return err
 	}
 	*result=SerializeResult(engineResult)
+	fmt.Printf("result=%+v\n",result)
 	return nil
 }
 
