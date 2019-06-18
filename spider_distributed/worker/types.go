@@ -76,7 +76,7 @@ func DeserializeParser( p SerializedParser) (engine.Parser,error) {
 			return nil,fmt.Errorf("invalid "+"args:%v",p.Args)
 		}
 	default:
-		return nil,errors.Errorf("unknow parser name")
+		return nil,errors.Errorf("unknow parser name:%s\n",p.Name)
 	}
 }
 type ParseResult struct {

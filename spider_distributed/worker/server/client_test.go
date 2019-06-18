@@ -22,17 +22,19 @@ func TestCrawlService(t *testing.T)  {
 		Url:"http://album.zhenai.com/u/1875061106",
 		Parser:worker.SerializedParser{
 			Name:config.ParseProfile,
-			Args:"盲点",
+			Args:"http://album.zhenai.com/u/1875061106",
 		},
 
 	}
-	var result worker.Request
+	var result worker.ParseResult
 	err=client.Call(config.CrawlServiceRpc,req,&result)
 	if err!=nil{
 		t.Error(err)
 	}else{
-		fmt.Printf("%+v",&result)
+		fmt.Printf("r=%v\n",result)
 	}
+
+
 
 }
 

@@ -5,9 +5,8 @@ import (
 	"log"
 	"spider/conf"
 	"spider/persist"
-	"spider_distributed/rpctype"
 )
-
+//要注册进去的rpc服务
 type ItemSaverService struct {
 	Client *elastic.Client
 	Esconf conf.EsConfType
@@ -24,8 +23,3 @@ func (s *ItemSaverService)Save(item interface{},result *string)error  {
 	return  err
 }
 
-func (s *ItemSaverService)Test(a int,result *rpctype.Res) error {
-	result.Code=1
-	result.Res=a
-	return nil
-}

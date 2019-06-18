@@ -6,7 +6,7 @@ import (
 	"net/rpc"
 	"net/rpc/jsonrpc"
 )
-
+//注册并开一个服务
 func ServeRpc(host string,service interface{}) error {
 	err := rpc.Register(service)
 	if err!=nil{
@@ -16,7 +16,7 @@ func ServeRpc(host string,service interface{}) error {
 	if e!=nil{
 		return e
 	}
-	log.Printf("rpc-server waiting!\n")
+	log.Printf("rpc-itemSaver-server waiting!\n")
 	for{
 		conn, e := listener.Accept()
 		if e!=nil{
@@ -28,6 +28,7 @@ func ServeRpc(host string,service interface{}) error {
 	}
 	return nil
 }
+//创建客户端
 func NewClient(host string)(* rpc.Client,error)  {
 	conn, e := net.Dial("tcp", host)
 	if e!=nil{

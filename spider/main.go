@@ -20,6 +20,7 @@ func main() {
 		Scheduler:&scheduler.QueuedScheduler{},
 		WorkerCount:5,
 		ItemChan:itemChan,
+		RequestProcessor:engine.Worker,
 
 	}
 	/*esimple:=engine.ConcurrentEngine{
