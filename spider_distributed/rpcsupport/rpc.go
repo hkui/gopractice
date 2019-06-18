@@ -16,7 +16,7 @@ func ServeRpc(host string,service interface{}) error {
 	if e!=nil{
 		return e
 	}
-	log.Printf("rpc-itemSaver-server waiting!\n")
+	log.Printf("rpc-server waiting!\n")
 	for{
 		conn, e := listener.Accept()
 		if e!=nil{

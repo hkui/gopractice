@@ -13,6 +13,7 @@ func CreateProcessor()(engine.Processor,error)  {
 	if err!=nil{
 		return nil,err
 	}
+
 	return func(req engine.Request) (result engine.ParseResult, e error) {
 		sReq:=worker.SerializeRequest(req)
 		var sResult worker.ParseResult

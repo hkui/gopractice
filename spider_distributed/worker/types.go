@@ -8,7 +8,7 @@ import (
 	"spider/zhenai/parser"
 	"spider_distributed/config"
 )
-
+//序列化解析器
 type SerializedParser struct {
 	Name string
 	Args interface{}
@@ -17,7 +17,7 @@ type Request struct {
 	Url string
 	Parser SerializedParser
 }
-
+//序列化request
 func SerializeRequest(r engine.Request) Request {
 	name,args:=r.Parser.Serialize()
 	return Request{
@@ -28,6 +28,7 @@ func SerializeRequest(r engine.Request) Request {
 		},
 	}
 }
+//序列化ParseResult
 func SerializeResult(r engine.ParseResult)ParseResult  {
 	result:=ParseResult{
 		Items:r.Items,
@@ -37,7 +38,7 @@ func SerializeResult(r engine.ParseResult)ParseResult  {
 	}
 	return result
 }
-
+//反序列化Request
 func DeserializeRequest(r Request)(engine.Request,error){
 	parser,err:=DeserializeParser(r.Parser)
 	if err!=nil{
@@ -48,6 +49,7 @@ func DeserializeRequest(r Request)(engine.Request,error){
 		Parser:parser,
 	},nil
 }
+//反序列化parseResult
 func DeserializeResult(r ParseResult) engine.ParseResult{
 	result:=engine.ParseResult{
 		Items:r.Items,
@@ -61,6 +63,7 @@ func DeserializeResult(r ParseResult) engine.ParseResult{
 	}
 	return result
 }
+//反序列化parser
 func DeserializeParser( p SerializedParser) (engine.Parser,error) {
 	switch p.Name{
 	case config.ParseCityList:
