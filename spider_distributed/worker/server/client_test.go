@@ -19,19 +19,23 @@ func TestCrawlService(t *testing.T)  {
 		panic(err)
 	}
 	req:=worker.Request{
-		Url:"http://album.zhenai.com/u/1875061106",
+		Url:"http://www.zhenai.com/zhenghun/beijing",
 		Parser:worker.SerializedParser{
-			Name:config.ParseProfile,
-			Args:"http://album.zhenai.com/u/1875061106",
+			Name:config.ParseCity,
+			Args:"http://www.zhenai.com/zhenghun/beijing",
 		},
 
 	}
+
 	var result worker.ParseResult
 	err=client.Call(config.CrawlServiceRpc,req,&result)
 	if err!=nil{
 		t.Error(err)
 	}else{
-		fmt.Printf("r=%v\n",result)
+		for k,v:=range result.Items{
+			fmt.Println(k,v.(map[string]interface{})["Url"])
+		}
+
 	}
 
 
