@@ -8,7 +8,10 @@ type ConcurrentEngine struct {
 	Scheduler Scheduler
 	WorkerCount int
 	ItemChan chan interface{}
+	RequestProcessor Processor
 }
+type Processor func(request Request)(ParseResult,error)
+
 type Scheduler interface {
 	Submit( Request)
 	WorkerChan() chan Request
@@ -24,7 +27,7 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 	e.Scheduler.Run()
 
 	for i:=0;i<e.WorkerCount;i++{
-		createWorker(e.Scheduler.WorkerChan(),out,e.Scheduler)
+		e.createWorker(e.Scheduler.WorkerChan(),out,e.Scheduler)
 	}
 	for _,r:=range seeds{
 		fmt.Println("send s.requestChan")
@@ -49,12 +52,12 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 	}
 }
 //从Request通过fetcher和parser获取更多的Requests
-func createWorker(in chan Request,out chan ParseResult,notifier ReadyNotifier)  {
+func (e *ConcurrentEngine)createWorker(in chan Request,out chan ParseResult,notifier ReadyNotifier)  {
 	go func() {
 		for{
 			notifier.WorkerReady(in)
 			request:=<-in
-			result,err:=Worker(request)
+			result,err:=e.RequestProcessor(request)
 			if err!=nil{
 				continue
 			}

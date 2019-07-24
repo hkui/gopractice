@@ -15,7 +15,7 @@ var  reId  =regexp.MustCompile(`<div class="id" [^>]+>ID：(\d+)</div>`)
 
 var reMore=regexp.MustCompile(`<div class="des f-cl" [^>]+>([^<]+)</div>`)
 
-func parseProfile(contents []byte,s string) engine.ParseResult  {
+func ParseProfile(contents []byte,s string) engine.ParseResult  {
 	profile:=model.Profile{}
 	morestr:=extractString(contents,reMore)//阿坝 | 42岁 | 大学本科 | 离异 | 163cm | 5001-8000元
 	strArr:=strings.Split(morestr,"|")
@@ -65,11 +65,11 @@ type ProfileParser struct {
 }
 
 func (p *ProfileParser) Parse(contents []byte, name string) engine.ParseResult {
-	return parseProfile(contents,p.userName)
+	return ParseProfile(contents,p.userName)
 }
 
 func (p *ProfileParser) Serialize() (name string, args interface{}) {
-	return "ProfileParser",p.userName
+	return "ParseProfile",p.userName
 }
 
 

@@ -1,14 +1,24 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"gopkg.in/olivere/elastic.v5"
 	"spider/conf"
 	"spider_distributed/presist"
 	"spider_distributed/rpcsupport"
 )
+var port=flag.Int("port",0,"port to linten on")
+
 
 func main() {
-	err := ServeRpc(":1234", conf.EsConf)
+	flag.Parse()
+	if *port==0{
+		fmt.Println("please specify port")
+		return
+	}
+
+	err := ServeRpc(fmt.Sprintf(":%d",*port), conf.EsConf)
 	if err!=nil{
 		panic(err)
 	}
