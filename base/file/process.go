@@ -17,25 +17,29 @@ type res struct {
 }
 func main() {
 
-	var countArr [2000]res
+
+	//countArr:=make(map[int64])
+
+	//fmt.Println(countArr[0])
+	os.Exit(1)
 
 	timestampStart,_:=time.ParseInLocation(format,timestrStart,time.Local)
 	timestampEnd,_:=time.ParseInLocation(format,timestrEnd,time.Local)
 
 	tstart:=timestampStart.Unix()
 	tend:=timestampEnd.Unix()
-	fmt.Println(tstart,tend)
+	//fmt.Println(tstart,tend)
 	arr:=readFromfile()
 
 	for i:=tstart;i<tend;{
 		left:=i
 		right:=left+diff
+
 		for k,tt:=range arr {
 			if tt >= left && tt<right {
-				countArr[i].count++
-
+				fmt.Println(i)
+				//(countArr[i]).count++
 				//countArr[i].nums=append(countArr[i].nums,tt)
-
 
 				arr=append(arr[:k],arr[k+1:]...)
 			}
@@ -43,9 +47,9 @@ func main() {
 		i+=diff
 	}
 
-	for k,v:=range countArr{
+	/*for k,v:=range countArr{
 		fmt.Printf("%d=>%d\n",k,v)
-	}
+	}*/
 
 
 
